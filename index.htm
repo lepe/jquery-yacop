@@ -8,26 +8,16 @@
         font-size: 12px;
       }
       code {
+        display: block;
         padding: 0;
-        margin: 5px;
-        background: #f0f0f0;
-        border: 1px solid #ccc;
-        line-height: 20px;
-        
-        width: 500px;
-        overflow: auto;
-        
-        overflow-Y: hidden;
-		white-space:pre;
-    display: block;
-    padding-bottom: 20px;
-    padding-left: 10px;
-  }
-  #main {
-    width: 600px;
-    margin: auto;
-  }
+      }
+      #main {
+        width: 600px;
+        margin: auto;
+      }
   </style>
+    <link href="prism.css" rel="stylesheet" type="text/css"/>
+    <script src="prism.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="main">
@@ -74,16 +64,16 @@
       <h3>
         Example:
       </h3>
-      <code class="js">
+      <code class="language-javascript">
         //Javascript
         $("#mydiv").callout("What is this?");
       </code>
-      <code class="css">
+      <code class="language-css">
         /* CSS */
         .callout {
-        padding: 5px;
-        border: 1px solid #7992B0;
-        background-color: #8AA9B7;
+            padding: 5px;
+            border: 1px solid #7992B0;
+            background-color: #8AA9B7;
         }
       </code>
       <h3> GIT Repository: <a href="https://github.com/lepe/jquery-yacop">https://github.com/lepe/jquery-yacop</a> </h3>
@@ -124,24 +114,24 @@
       <h4>
         [1] Create -&gt; Show/Hide
       </h4>
-      <code class="js">
+      <code class="language-javascript">
         $(function() {
-        $("#mydiv").callout({ show: false, msg:"What is this?" });
+            $("#mydiv").callout({ show: false, msg:"What is this?" });
         });
         $("#mydiv").hover(function() {
-        $(this).callout("show");
+            $(this).callout("show");
         },function() {
-        $(this).callout("hide");
+            $(this).callout("hide");
         });
       </code>
       <h4>
         [2] Create/Destroy
       </h4>
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").hover(function() {
-        $(this).callout("What is this?");
+            $(this).callout("What is this?");
         },function() {
-        $(this).callout("destroy");
+            $(this).callout("destroy");
         });
       </code>
       <p>
@@ -150,41 +140,41 @@
       <h3>
         Multiple elements - one callout
       </h3>
-      <code class="js">
+      <code class="language-javascript">
         $("a.hint").callout("Click here please!");
       </code>
       or:
-      <code class="js">
+      <code class="language-javascript">
         $("a.hint").each(function() {
-        $(this).callout($(this).attr("title"));
+            $(this).callout($(this).attr("title"));
         });
       </code>
       <h3>
         Multiple callouts - one element
       </h3>
-      <code class="js">
+      <code class="language-javascript">
         $("#special").callout({
-        position: "bottom",
-        align:"left",
-        pointer: "left",
-        msg: "Start here"
+            position: "bottom",
+            align:"left",
+            pointer: "left",
+            msg: "Start here"
         }).callout({
-        position: "top",
-        align:"right",
-        pointer: "right",
-        msg: "Ends here"
+            position: "top",
+            align:"right",
+            pointer: "right",
+            msg: "Ends here"
         });
       </code>
       <p>
         And of course, it can be chained with other JQuery functions:
       </p>
-      <code class="js">
+      <code class="language-javascript">
         $(".error").callout("Oops!").css("color",red);
       </code>
       <h2>
         Documentation
       </h2>
-      <code class="js">
+      <code class="language-javascript">
         $(selector).callout( OPTIONS );
       </code>
       <h3>
@@ -196,7 +186,7 @@
       <i>
         The content of the message (text or html)
       </i>
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").callout("What is this?");
         
         //Or can be also specified as:
@@ -225,15 +215,15 @@
         </b>
         It can be specified in the CSS file too. (see CSS section below)
       </h4>
-      <code class="js">
+      <code class="language-javascript">
         $("#msg").callout({
-        width: 200,
-        msg:"What is this?"
+            width: 200,
+            msg:"What is this?"
         });
         $("#mydiv").callout({
-        width: 200,
-        height: 100,
-        msg:"What is this?"
+            width: 200,
+            height: 100,
+            msg:"What is this?"
         });
       </code>
       <h4>
@@ -247,10 +237,10 @@
         Values:
       </b>
       left | right | top | bottom
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").callout({
-        position: "top",
-        msg:"What is this?"
+            position: "top",
+            msg:"What is this?"
         });
       </code>
       <h4>
@@ -269,11 +259,11 @@
         Note:
       </b>
       This is not text alignment. For text alignment use CSS
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").callout({
-        position: "top",
-        align : "left",
-        msg:"What is this?"
+            position: "top",
+            align : "left",
+            msg:"What is this?"
         });
       </code>
       <h4>
@@ -294,12 +284,12 @@
         Note:
       </b>
       When using "none" it will not display the pointer.
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").callout({
-        position: "top",
-        align : "left",
-        pointer: "right",
-        msg:"What is this?"
+            position: "top",
+            align : "left",
+            pointer: "right",
+            msg:"What is this?"
         });
       </code>
       <h4>
@@ -308,11 +298,11 @@
       <div>
         How fast or how slow do the callout appears / hides.
         <br>
-        <code class="js">
+        <code class="language-javascript">
           $("#mydiv").callout({
-          msg:"What is this?",
-          fadeIn: 200,
-          fadeOut: 500
+              msg:"What is this?",
+              fadeIn: 200,
+              fadeOut: 500
           });
         </code>
       </div>
@@ -323,40 +313,45 @@
       </h4>
       Functions to be executed on events (added in 20120913 version):
       <br>
-      <code class="js" value="$(&quot;.hint1&quot;).callout({ show: false, position: &quot;top&quot;, msg: &quot;This is without any style, and starts hidden&quot;, 
-beforeShow: function() { 
-console.log(&quot;BEFORE SHOW&quot;);
-}, afterShow: function() {
-console.log(&quot;AFTER SHOW&quot;);
-}, beforeHide: function() {
-console.log(&quot;BEFORE HIDE&quot;);
-}, afterHide: function() {
-console.log(&quot;AFTER HIDE&quot;);
-}, afterCreate: function() {
-console.log(&quot;AFTER CREATE&quot;);
-}, beforeDestroy: function() {
-console.log(&quot;BEFORE DESTROY&quot;);
-}, afterReorder: function() {
-console.log(&quot;AFTER REORDER&quot;);
-}, beforeReorder: function() {
-console.log(&quot;BEFORE REORDER&quot;);
-}
-});">
-  $("#mydiv").callout({ msg: "This is me", 
-  afterCreate: function() {
-  console.log("Hello!");
-  }, beforeShow: function() { 
-  console.log("Prepare to be amazed!");
-  }, afterShow: function() {
-  console.log("Applause!");
-  }, beforeHide: function() {
-  console.log("I'll be back!");
-  }, afterHide: function() {
-  console.log("Where am I?");
-  }, beforeDestroy: function() {
-  console.log("Bye Bye!");
-  }
-  });
+      <code class="language-javascript">
+        $(&quot;.hint1&quot;).callout({ 
+            show: false, 
+            position: &quot;top&quot;, 
+            msg: &quot;This is without any style, and starts hidden&quot;, 
+            beforeShow: function() { 
+                console.log(&quot;BEFORE SHOW&quot;);
+            }, afterShow: function() {
+                console.log(&quot;AFTER SHOW&quot;);
+            }, beforeHide: function() {
+                console.log(&quot;BEFORE HIDE&quot;);
+            }, afterHide: function() {
+                console.log(&quot;AFTER HIDE&quot;);
+            }, afterCreate: function() {
+                console.log(&quot;AFTER CREATE&quot;);
+            }, beforeDestroy: function() {
+                console.log(&quot;BEFORE DESTROY&quot;);
+            }, afterReorder: function() {
+                console.log(&quot;AFTER REORDER&quot;);
+            }, beforeReorder: function() {
+                console.log(&quot;BEFORE REORDER&quot;);
+            }
+        });
+        $("#mydiv").callout({ 
+            msg: "This is me", 
+            afterCreate: function() {
+                console.log("Hello!");
+            }, beforeShow: function() { 
+                console.log("Prepare to be amazed!");
+            }, afterShow: function() {
+                console.log("Applause!");
+            }, beforeHide: function() {
+                console.log("I'll be back!");
+            }, afterHide: function() {
+                console.log("Where am I?");
+            }, beforeDestroy: function() {
+                console.log("Bye Bye!");
+            }
+        });
       </code>
       <div>
         <br>
@@ -380,63 +375,63 @@ console.log(&quot;BEFORE REORDER&quot;);
       <p>
         By default the callout has no style. It will use the class "callout" to give it style, for example, this is a basic callout:
       </p>
-      <code class="css">
+      <code class="language-css">
         .callout {
-        padding: 5px;
-        border: 1px solid #7992B0;
-        background-color: #8AA9B7;
+            padding: 5px;
+            border: 1px solid #7992B0;
+            background-color: #8AA9B7;
         }
       </code>
       <p>
         That is all you need to specify. But if you want a nicer callout, you can add round corners and shadows:
       </p>
-      <code class="css">
+      <code class="language-css">
         .callout {
-        padding: 5px;
-        border: 1px solid #7992B0;
-        background-color: #8AA9B7;
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
-        box-shadow:		 5px 5px 10px rgba(0, 0, 0, 0.6);
-        -moz-box-shadow:	5px 5px 10px rgba(0, 0, 0, 0.6);
-        -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+            padding: 5px;
+            border: 1px solid #7992B0;
+            background-color: #8AA9B7;
+            border-radius: 8px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            box-shadow:		 5px 5px 10px rgba(0, 0, 0, 0.6);
+            -moz-box-shadow:	5px 5px 10px rgba(0, 0, 0, 0.6);
+            -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
         }
       </code>
       <p>
         Using the above examples will apply the same style for all your callouts. You don't have to specify the "css" callout option.
         In order to have diferent styles of callouts in one page, use the "callout" class to specify common properties, for example:
       </p>
-      <code class="css">
+      <code class="language-css">
         .callout {
-        padding: 5px;
-        border-radius: 8px;
-        -webkit-border-radius: 8px;
-        -moz-border-radius: 8px;
+            padding: 5px;
+            border-radius: 8px;
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
         }
       </code>
       <p>
         Then, add other classes (you choose the name) to specify further properties, for example the color:
       </p>
-      <code class="css">
+      <code class="language-css">
         .callout.red {
-        border: 1px solid #EC2828;
-        background-color: #8D1010;
-        color: white;
+            border: 1px solid #EC2828;
+            background-color: #8D1010;
+            color: white;
         }
         
         .callout.yellow {
-        border: 1px solid #B98F0F;
-        background-color: #F7F3B1;
+            border: 1px solid #B98F0F;
+            background-color: #F7F3B1;
         }
       </code>
       <p>
         And as specified previously, set the class in the options, like:
       </p>
-      <code class="js">
+      <code class="language-javascript">
         $("#mydiv").callout({
-        css:"red",
-        msg:"What is this?"
+            css:"red",
+            msg:"What is this?"
         });
       </code>
       <p>
@@ -449,11 +444,11 @@ console.log(&quot;BEFORE REORDER&quot;);
         Adjusting style:
       </h2>
       Optionally, you can adjust the margins, width and height of your callout directly in the CSS like:
-      <code class="css">
+      <code class="language-css">
         .callout {
-        margin-left: 30px;
-        width: 200px;
-        height: 100px;
+            margin-left: 30px;
+            width: 200px;
+            height: 100px;
         }
       </code>
       The plugin will automatically adjust accordingly.
