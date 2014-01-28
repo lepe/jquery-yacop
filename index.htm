@@ -1,171 +1,560 @@
 <html>
-<head>
-<title>YACOP - Yet Another Callout Plugin</title>
-<style type="text/css">
-body { font-size: 12px; }
-code {
-	padding: 0;
-	margin: 5px;
-	background: #f0f0f0;
-	border: 1px solid #ccc;
-	line-height: 20px; 
-	width: 500px;
-	overflow: auto; 
-	overflow-Y: hidden;
+  <head>
+    <title>
+      YACOP - Yet Another Callout Plugin
+    </title>
+    <style type="text/css">
+      body {
+        font-size: 12px;
+      }
+      code {
+        padding: 0;
+        margin: 5px;
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+        line-height: 20px;
+        
+        width: 500px;
+        overflow: auto;
+        
+        overflow-Y: hidden;
 		white-space:pre;
-		display: block;
-		padding-bottom: 20px;
-		padding-left: 10px;
+    display: block;
+    padding-bottom: 20px;
+    padding-left: 10px;
+  }
+  #main {
+    width: 600px;
+    margin: auto;
+  }
+  </style>
+  </head>
+  <body>
+    <div id="main">
+      <h1>
+        YACOP - Yet Another Callout Plugin - JQuery
+      </h1>
+      author: Alberto Lepe (www.alepe.com)
+      <br>
+      <a href="http://yacop.alepe.com/yacop.jpg" target="_blank" _blank="">
+        Screenshot
+      </a>
+      &nbsp;|&nbsp;
+      <a href="http://yacop.alepe.com/callout.htm" target="_blank">
+        Demo
+      </a>
+      <br>
+      <h2>
+        Overview
+      </h2>
+      <p>
+        Once upon a time there was a 
+        <a href="http://plugins.jquery.com/project/callout" target="_blank">
+          callout plugin for Jquery
+        </a>
+        , which I never had the oportunity to meet. It seems that it went offline... So, as I needed that functionality I decided to build my own plugin (from scratch) and share it with the community.
+      </p>
+      <h3>
+        Advantages
+      </h3>
+      <ul>
+        <li>
+          Easy to use and implement
+        </li>
+        <li>
+          Pure CSS+JQuery implementation (no images required).
+        </li>
+        <li>
+          Highly customizable
+        </li>
+        <li>
+          Minimal CSS properties required
+        </li>
+      </ul>
+      <h3>
+        Example:
+      </h3>
+      <code class="js">
+        //Javascript
+        $("#mydiv").callout("What is this?");
+      </code>
+      <code class="css">
+        /* CSS */
+        .callout {
+        padding: 5px;
+        border: 1px solid #7992B0;
+        background-color: #8AA9B7;
+        }
+      </code>
+      <h3> GIT Repository: <a href="https://github.com/lepe/jquery-yacop">https://github.com/lepe/jquery-yacop</a> </h3>
+      <h3>
+        Download (
+        <span style="color: rgb(255, 0, 0);">
+          Updated: 2012-09-13
+        </span>
+        )
+      </h3>
+      [12 Kb ] 
+      <a href="http://yacop.alepe.com/jquery.callout.src.js" target="_blank">
+        jquery.callout.src.js
+      </a>
+      <br>
+      [ 5.4 Kb ] 
+      <a href="http://yacop.alepe.com/jquery.callout.min.js" target="_blank">
+        jquery.callout.min.js
+      </a>
+      (minified version)
+      <h3>
+        More Examples:
+      </h3>
+      <p>
+        There are mainly 2 ways to use this plugin:
+      </p>
+      [1] Create the callouts and then show/hide them on event. 
+      <br>
+      <div style="margin-left: 40px;">
+        Example: if you want to use it in a form to show errors.
+        <br>
+      </div>
+      [2] Create and destroy it every time. 
+      <br>
+      <div style="margin-left: 40px;">
+        Example: Dynamically elements created with AJAX.
+      </div>
+      <h4>
+        [1] Create -&gt; Show/Hide
+      </h4>
+      <code class="js">
+        $(function() {
+        $("#mydiv").callout({ show: false, msg:"What is this?" });
+        });
+        $("#mydiv").hover(function() {
+        $(this).callout("show");
+        },function() {
+        $(this).callout("hide");
+        });
+      </code>
+      <h4>
+        [2] Create/Destroy
+      </h4>
+      <code class="js">
+        $("#mydiv").hover(function() {
+        $(this).callout("What is this?");
+        },function() {
+        $(this).callout("destroy");
+        });
+      </code>
+      <p>
+        You can use multiple elements for a single type of callout or set several callouts to a single element.
+      </p>
+      <h3>
+        Multiple elements - one callout
+      </h3>
+      <code class="js">
+        $("a.hint").callout("Click here please!");
+      </code>
+      or:
+      <code class="js">
+        $("a.hint").each(function() {
+        $(this).callout($(this).attr("title"));
+        });
+      </code>
+      <h3>
+        Multiple callouts - one element
+      </h3>
+      <code class="js">
+        $("#special").callout({
+        position: "bottom",
+        align:"left",
+        pointer: "left",
+        msg: "Start here"
+        }).callout({
+        position: "top",
+        align:"right",
+        pointer: "right",
+        msg: "Ends here"
+        });
+      </code>
+      <p>
+        And of course, it can be chained with other JQuery functions:
+      </p>
+      <code class="js">
+        $(".error").callout("Oops!").css("color",red);
+      </code>
+      <h2>
+        Documentation
+      </h2>
+      <code class="js">
+        $(selector).callout( OPTIONS );
+      </code>
+      <h3>
+        Options
+      </h3>
+      <h4>
+        msg   [ ** required ** ]
+      </h4>
+      <i>
+        The content of the message (text or html)
+      </i>
+      <code class="js">
+        $("#mydiv").callout("What is this?");
+        
+        //Or can be also specified as:
+        
+        $("#mydiv").callout({ msg: "What is this?" });
+        
+        //Passing other element content as message:
+        
+        $("#mydiv").callout({ msg: $("#otherdiv").html() });
+      </code>
+      <h4>
+        width  [ default: auto ]
+      </h4>
+      <i>
+        Callout width (without unit).
+      </i>
+      <h4>
+        height  [ default: auto ]
+      </h4>
+      <i>
+        Callout height (without unit).
+      </i>
+      <h4>
+        <b>
+          Note:&nbsp;
+        </b>
+        It can be specified in the CSS file too. (see CSS section below)
+      </h4>
+      <code class="js">
+        $("#msg").callout({
+        width: 200,
+        msg:"What is this?"
+        });
+        $("#mydiv").callout({
+        width: 200,
+        height: 100,
+        msg:"What is this?"
+        });
+      </code>
+      <h4>
+        position  [ default : top ]
+      </h4>
+      <i>
+        Callout position in relation to the selected element(s)
+      </i>
+      <b>
+        <br>
+        Values:
+      </b>
+      left | right | top | bottom
+      <code class="js">
+        $("#mydiv").callout({
+        position: "top",
+        msg:"What is this?"
+        });
+      </code>
+      <h4>
+        align [ default : center ]
+      </h4>
+      <i>
+        Callout alignment in relation to the selected element(s)
+      </i>
+      <b>
+        <br>
+        Values:
+      </b>
+      left | right | top | bottom
+      <b>
+        <br>
+        Note:
+      </b>
+      This is not text alignment. For text alignment use CSS
+      <code class="js">
+        $("#mydiv").callout({
+        position: "top",
+        align : "left",
+        msg:"What is this?"
+        });
+      </code>
+      <h4>
+        pointer [ default : center ]
+      </h4>
+      <i>
+        Callout pointer alignment in relation to the callout element.
+        <br>
+      </i>
+      (By "pointer" I mean the triangle used to point at the target element.)
+      <b>
+        <br>
+        Values:
+      </b>
+      left | right | top | bottom | none
+      <b>
+        <br>
+        Note:
+      </b>
+      When using "none" it will not display the pointer.
+      <code class="js">
+        $("#mydiv").callout({
+        position: "top",
+        align : "left",
+        pointer: "right",
+        msg:"What is this?"
+        });
+      </code>
+      <h4>
+        fadeIn , fadeOut [ default: 2000 , 1000 ]
+      </h4>
+      <div>
+        How fast or how slow do the callout appears / hides.
+        <br>
+        <code class="js">
+          $("#mydiv").callout({
+          msg:"What is this?",
+          fadeIn: 200,
+          fadeOut: 500
+          });
+        </code>
+      </div>
+      <h4>
+        afterCreate,&nbsp; beforeShow,&nbsp;afterShow, &nbsp;beforeHide,&nbsp;afterHide,&nbsp;beforeDestroy,&nbsp;beforeReorder,&nbsp;afterReorder (Event Functions)
+      </h4>
+      <h4>
+      </h4>
+      Functions to be executed on events (added in 20120913 version):
+      <br>
+      <code class="js" value="$(&quot;.hint1&quot;).callout({ show: false, position: &quot;top&quot;, msg: &quot;This is without any style, and starts hidden&quot;, 
+beforeShow: function() { 
+console.log(&quot;BEFORE SHOW&quot;);
+}, afterShow: function() {
+console.log(&quot;AFTER SHOW&quot;);
+}, beforeHide: function() {
+console.log(&quot;BEFORE HIDE&quot;);
+}, afterHide: function() {
+console.log(&quot;AFTER HIDE&quot;);
+}, afterCreate: function() {
+console.log(&quot;AFTER CREATE&quot;);
+}, beforeDestroy: function() {
+console.log(&quot;BEFORE DESTROY&quot;);
+}, afterReorder: function() {
+console.log(&quot;AFTER REORDER&quot;);
+}, beforeReorder: function() {
+console.log(&quot;BEFORE REORDER&quot;);
 }
-#main { width: 600px; margin: auto; }
-</style>
-</head>
-<body>
-<div id="main">
-<h1>YACOP - Yet Another Callout Plugin - JQuery</h1>author: Alberto Lepe (www.alepe.com)<br><a href="http://yacop.alepe.com/yacop.jpg" target="_blank" _blank="">Screenshot</a>&nbsp;|&nbsp;<a href="http://yacop.alepe.com/callout.htm" target="_blank">Demo</a><br><h2>Overview</h2><p>Once upon a time there was a <a href="http://plugins.jquery.com/project/callout" target="_blank">callout plugin for Jquery</a>, which I never had the oportunity to meet. It seems that it went offline... So, as I needed that functionality I decided to build my own plugin (from scratch) and share it with the community.</p><h3>Advantages</h3><ul><li>Easy to use and implement</li><li>Pure CSS+JQuery implementation (no images required).</li><li>Highly customizable</li><li>Minimal CSS properties required</li></ul><h3>Example:</h3><code class="js">//Javascript
-$("#mydiv").callout("What is this?");</code><code class="css">/* CSS */
-.callout {
-    padding: 5px;
-    border: 1px solid #7992B0;
-    background-color: #8AA9B7;
-}</code><h3>Download (<span style="color: rgb(255, 0, 0);">Updated: 2012-09-13</span>)</h3>[12 Kb ] <a href="http://yacop.alepe.com/jquery.callout.src.js" target="_blank">jquery.callout.src.js</a><br>[ 5.4 Kb ] <a href="http://yacop.alepe.com/jquery.callout.min.js" target="_blank">jquery.callout.min.js</a> (minified version)<h3>More Examples:</h3><p>There are mainly 2 ways to use this plugin:
-</p>[1] Create the callouts and then show/hide them on event. <br><div style="margin-left: 40px;">Example: if you want to use it in a form to show errors.
-<br></div>[2] Create and destroy it every time. <br><div style="margin-left: 40px;">Example: Dynamically elements created with AJAX.</div><h4>[1] Create -&gt; Show/Hide</h4><code class="js">$(function() {
-    $("#mydiv").callout({ show: false, msg:"What is this?" });
-});
-$("#mydiv").hover(function() {
-    $(this).callout("show");
-},function() {
-    $(this).callout("hide");
-});</code><h4>[2] Create/Destroy</h4><code class="js">$("#mydiv").hover(function() {
-    $(this).callout("What is this?");
-},function() {
-    $(this).callout("destroy");
-});</code>
-<p>
-You can use multiple elements for a single type of callout or set several callouts to a single element.</p><h3>Multiple elements - one callout</h3><code class="js">$("a.hint").callout("Click here please!");</code>or:<code class="js">$("a.hint").each(function() {
-    $(this).callout($(this).attr("title"));
-});</code><h3>Multiple callouts - one element</h3><code class="js">$("#special").callout({
-    position: "bottom",
-    align:"left",
-    pointer: "left",
-    msg: "Start here"
-}).callout({
-    position: "top",
-    align:"right",
-    pointer: "right",
-    msg: "Ends here"
-});</code>
-<p>And of course, it can be chained with other JQuery functions:</p>
-<code class="js">$(".error").callout("Oops!").css("color",red);</code><h2>Documentation</h2><code class="js">$(selector).callout( OPTIONS );</code><h3>Options</h3><h4>msg   [ ** required ** ]</h4><i>The content of the message (text or html)</i><code class="js">$("#mydiv").callout("What is this?");
-
-//Or can be also specified as:
-
-$("#mydiv").callout({ msg: "What is this?" });
-
-//Passing other element content as message:
-
-$("#mydiv").callout({ msg: $("#otherdiv").html() });</code><h4>width  [ default: auto ]</h4><i>Callout width (without unit).</i><h4>height  [ default: auto ]</h4><i>Callout height (without unit).</i><h4><b>Note:&nbsp;</b>It can be specified in the CSS file too. (see CSS section below)</h4><code class="js">$("#msg").callout({
-    width: 200,
-    msg:"What is this?"
-});
-$("#mydiv").callout({
-    width: 200,
-    height: 100,
-    msg:"What is this?"
-});</code><h4>position  [ default : top ]</h4><i>Callout position in relation to the selected element(s)</i><b><br>Values:</b>left | right | top | bottom<code class="js">$("#mydiv").callout({
-    position: "top",
-    msg:"What is this?"
-});</code><h4>align [ default : center ]</h4><i>Callout alignment in relation to the selected element(s)</i><b><br>Values:</b>left | right | top | bottom<b><br>Note:</b>This is not text alignment. For text alignment use CSS<code class="js">$("#mydiv").callout({
-    position: "top",
-    align : "left",
-    msg:"What is this?"
-});</code><h4>pointer [ default : center ]</h4><i>Callout pointer alignment in relation to the callout element.<br></i>(By "pointer" I mean the triangle used to point at the target element.)<b><br>Values:</b>left | right | top | bottom | none<b><br>Note:</b>When using "none" it will not display the pointer.<code class="js">$("#mydiv").callout({
-    position: "top",
-    align : "left",
-    pointer: "right",
-    msg:"What is this?"
-});</code><h4>fadeIn , fadeOut [ default: 2000 , 1000 ]</h4><div>How fast or how slow do the callout appears / hides.<br><code class="js">$("#mydiv").callout({
-    msg:"What is this?",
-    fadeIn: 200,
-    fadeOut: 500
-});</code></div><h4>afterCreate,&nbsp; beforeShow,&nbsp;afterShow, &nbsp;beforeHide,&nbsp;afterHide,&nbsp;beforeDestroy,&nbsp;beforeReorder,&nbsp;afterReorder (Event Functions)</h4><h4></h4>Functions to be executed on events (added in 20120913 version):<br><code class="js" value="$(&quot;.hint1&quot;).callout({ show: false, position: &quot;top&quot;, msg: &quot;This is without any style, and starts hidden&quot;, 
-                beforeShow: function() { 
-                    console.log(&quot;BEFORE SHOW&quot;);
-             }, afterShow: function() {
-                    console.log(&quot;AFTER SHOW&quot;);
-             }, beforeHide: function() {
-                    console.log(&quot;BEFORE HIDE&quot;);
-             }, afterHide: function() {
-                    console.log(&quot;AFTER HIDE&quot;);
-             }, afterCreate: function() {
-                    console.log(&quot;AFTER CREATE&quot;);
-             }, beforeDestroy: function() {
-                    console.log(&quot;BEFORE DESTROY&quot;);
-             }, afterReorder: function() {
-                    console.log(&quot;AFTER REORDER&quot;);
-             }, beforeReorder: function() {
-                    console.log(&quot;BEFORE REORDER&quot;);
-             }
-       });">$("#mydiv").callout({ msg: "This is me", 
-       afterCreate: function() {
-        console.log("Hello!");
-    }, beforeShow: function() { 
-        console.log("Prepare to be amazed!");
-    }, afterShow: function() {
-        console.log("Applause!");
-    }, beforeHide: function() {
-        console.log("I'll be back!");
-    }, afterHide: function() {
-        console.log("Where am I?");
-    }, beforeDestroy: function() {
-        console.log("Bye Bye!");
-    }
-});</code><div><br><span style="font-weight: bold;">NOTE:</span> "beforeReorder" and "afterReoder" happen during window resize or during "show". The internal "Reorder" function calculates the correct position in which it has to be displayed.<br>Those events will be only called if the callout is visible, which will not be called during "show" unless the callout is already visible (like, for example when fixing its position when the target element position changes).</div><h4>css [ no default value ]<br></h4><i>Additional classname for the callout (see CSS section below)</i><h2>CSS Customization</h2><p>By default the callout has no style. It will use the class "callout" to give it style, for example, this is a basic callout:</p>
-<code class="css">.callout {
-    padding: 5px;
-    border: 1px solid #7992B0;
-    background-color: #8AA9B7;
-}</code><p>That is all you need to specify. But if you want a nicer callout, you can add round corners and shadows:</p><code class="css">.callout {
-    padding: 5px;
-    border: 1px solid #7992B0;
-    background-color: #8AA9B7;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    box-shadow:		 5px 5px 10px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow:	5px 5px 10px rgba(0, 0, 0, 0.6);
-    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
-}</code><p>Using the above examples will apply the same style for all your callouts. You don't have to specify the "css" callout option.
-In order to have diferent styles of callouts in one page, use the "callout" class to specify common properties, for example:</p><code class="css">.callout {
-    padding: 5px;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-}</code><p>Then, add other classes (you choose the name) to specify further properties, for example the color:</p><code class="css">.callout.red {
-    border: 1px solid #EC2828;
-    background-color: #8D1010;
-    color: white;
-}
-
-.callout.yellow {
-    border: 1px solid #B98F0F;
-    background-color: #F7F3B1;
-}</code><p>And as specified previously, set the class in the options, like:</p><code class="js">$("#mydiv").callout({
-    css:"red",
-    msg:"What is this?"
-});</code><p>At the demo page you can see other styles, but don't limit yourself to those, be creative :).
-If you want to share your creation, please let me know to add it to the callouts gallery.</p><h3></h3><h2>Adjusting style:</h2>Optionally, you can adjust the margins, width and height of your callout directly in the CSS like:<code class="css">.callout {
-    margin-left: 30px;
-    width: 200px;
-    height: 100px;
-}</code>The plugin will automatically adjust accordingly.<p>Remember that you can use any CSS property inside your callouts, like aligning text, setting background images or gradients, etc.<br><b>NOTE:</b>The style of the pointer may not look correctly when using too much transparency, background images or border images.</p><h3></h3><h2>Special CSS Customization:</h2>If you need further customization, you can set additional properties to these classes:<br><ul><li><b>callout_main:</b>This is the main wrapper of the callout (usually it does not need style).</li><li><b>callout_cont_* :</b>This sets the additional style for "div.callout" according to the position.</li><li><b>callout_*:</b>This sets the additional style for "div.callout_main &gt; div.callout_tri" which is the pointer (tri stands for triangle).
-You may need to set in this class mainly the "left" and "top" properties for fixing misalignment.</li></ul>Substitute "<b>*</b>" for 'left' , 'right' , 'top' or 'bottom'.<br><h2>Compatibility:<br></h2><h4>JQuery:</h4><pre>* 1.3.x and UP<br></pre><h4>Supported Browsers:</h4><pre>* Firefox
+});">
+  $("#mydiv").callout({ msg: "This is me", 
+  afterCreate: function() {
+  console.log("Hello!");
+  }, beforeShow: function() { 
+  console.log("Prepare to be amazed!");
+  }, afterShow: function() {
+  console.log("Applause!");
+  }, beforeHide: function() {
+  console.log("I'll be back!");
+  }, afterHide: function() {
+  console.log("Where am I?");
+  }, beforeDestroy: function() {
+  console.log("Bye Bye!");
+  }
+  });
+      </code>
+      <div>
+        <br>
+        <span style="font-weight: bold;">
+          NOTE:
+        </span>
+        "beforeReorder" and "afterReoder" happen during window resize or during "show". The internal "Reorder" function calculates the correct position in which it has to be displayed.
+        <br>
+        Those events will be only called if the callout is visible, which will not be called during "show" unless the callout is already visible (like, for example when fixing its position when the target element position changes).
+      </div>
+      <h4>
+        css [ no default value ]
+        <br>
+      </h4>
+      <i>
+        Additional classname for the callout (see CSS section below)
+      </i>
+      <h2>
+        CSS Customization
+      </h2>
+      <p>
+        By default the callout has no style. It will use the class "callout" to give it style, for example, this is a basic callout:
+      </p>
+      <code class="css">
+        .callout {
+        padding: 5px;
+        border: 1px solid #7992B0;
+        background-color: #8AA9B7;
+        }
+      </code>
+      <p>
+        That is all you need to specify. But if you want a nicer callout, you can add round corners and shadows:
+      </p>
+      <code class="css">
+        .callout {
+        padding: 5px;
+        border: 1px solid #7992B0;
+        background-color: #8AA9B7;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        box-shadow:		 5px 5px 10px rgba(0, 0, 0, 0.6);
+        -moz-box-shadow:	5px 5px 10px rgba(0, 0, 0, 0.6);
+        -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+        }
+      </code>
+      <p>
+        Using the above examples will apply the same style for all your callouts. You don't have to specify the "css" callout option.
+        In order to have diferent styles of callouts in one page, use the "callout" class to specify common properties, for example:
+      </p>
+      <code class="css">
+        .callout {
+        padding: 5px;
+        border-radius: 8px;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        }
+      </code>
+      <p>
+        Then, add other classes (you choose the name) to specify further properties, for example the color:
+      </p>
+      <code class="css">
+        .callout.red {
+        border: 1px solid #EC2828;
+        background-color: #8D1010;
+        color: white;
+        }
+        
+        .callout.yellow {
+        border: 1px solid #B98F0F;
+        background-color: #F7F3B1;
+        }
+      </code>
+      <p>
+        And as specified previously, set the class in the options, like:
+      </p>
+      <code class="js">
+        $("#mydiv").callout({
+        css:"red",
+        msg:"What is this?"
+        });
+      </code>
+      <p>
+        At the demo page you can see other styles, but don't limit yourself to those, be creative :).
+        If you want to share your creation, please let me know to add it to the callouts gallery.
+      </p>
+      <h3>
+      </h3>
+      <h2>
+        Adjusting style:
+      </h2>
+      Optionally, you can adjust the margins, width and height of your callout directly in the CSS like:
+      <code class="css">
+        .callout {
+        margin-left: 30px;
+        width: 200px;
+        height: 100px;
+        }
+      </code>
+      The plugin will automatically adjust accordingly.
+      <p>
+        Remember that you can use any CSS property inside your callouts, like aligning text, setting background images or gradients, etc.
+        <br>
+        <b>
+          NOTE:
+        </b>
+        The style of the pointer may not look correctly when using too much transparency, background images or border images.
+      </p>
+      <h3>
+      </h3>
+      <h2>
+        Special CSS Customization:
+      </h2>
+      If you need further customization, you can set additional properties to these classes:
+      <br>
+      <ul>
+        <li>
+          <b>
+            callout_main:
+          </b>
+          This is the main wrapper of the callout (usually it does not need style).
+        </li>
+        <li>
+          <b>
+            callout_cont_* :
+          </b>
+          This sets the additional style for "div.callout" according to the position.
+        </li>
+        <li>
+          <b>
+            callout_*:
+          </b>
+          This sets the additional style for "div.callout_main &gt; div.callout_tri" which is the pointer (tri stands for triangle).
+          You may need to set in this class mainly the "left" and "top" properties for fixing misalignment.
+        </li>
+      </ul>
+      Substitute "
+      <b>
+        *
+      </b>
+      " for 'left' , 'right' , 'top' or 'bottom'.
+      <br>
+      <h2>
+        Compatibility:
+        <br>
+      </h2>
+      <h4>
+        JQuery:
+      </h4>
+      <pre>
+* 1.3.x and UP
+<br>
+</pre>
+      <h4>
+        Supported Browsers:
+      </h4>
+      <pre>
+* Firefox
 * Chrome
 * Safari
 * Opera
-* IE9 (Untested)</pre><h3>Current version</h3>2012-09-13<h3>Change log (links on dates will show source code of that version)</h3>2012-09-13: Added events as suggested by Cemil Fidanlıgül<br><a href="http://yacop.alepe.com/jquery.callout.2012-05-20.js" target="_blank">2012-05-20</a>: The for loops were iterating through more properties than just the callouts and the callout property was removed upon destroy. Patch sent by:&nbsp;<span email="ca@byu.edu" class="gD">Conan C. Albrecht</span><br>2010-12-15: Class restructured<br>2010-12-14: if "title" is present, use that as content<br>2010-11-12: Added fadeIn/fadeOut as suggested by Donal Murtagh<br>2010-06-21: Shortcut for messages<br><a href="http://yacop.alepe.com/jquery.callout.2010-05-20.js" target="_blank">2010-05-20</a>: First release
-<br>2010-05-19: Yacop was born!
-</div>
-</body>
+* IE9 (Untested)
+</pre>
+      <h3>
+        Development version
+      </h3>
+      	<a href="https://github.com/lepe/jquery-yacop">https://github.com/lepe/jquery-yacop</a>
+      <h3>
+        Current version
+      </h3>
+      2012-09-13
+      <h3>
+        Change log (links on dates will show source code of that version)
+      </h3>
+      2012-09-13: Added events as suggested by Cemil Fidanlıgül
+      <br>
+      <a href="http://yacop.alepe.com/jquery.callout.2012-05-20.js" target="_blank">
+        2012-05-20
+      </a>
+      : The for loops were iterating through more properties than just the callouts and the callout property was removed upon destroy. Patch sent by:&nbsp;
+      <span email="ca@byu.edu" class="gD">
+        Conan C. Albrecht
+      </span>
+      <br>
+      2010-12-15: Class restructured
+      <br>
+      2010-12-14: if "title" is present, use that as content
+      <br>
+      2010-11-12: Added fadeIn/fadeOut as suggested by Donal Murtagh
+      <br>
+      2010-06-21: Shortcut for messages
+      <br>
+      <a href="http://yacop.alepe.com/jquery.callout.2010-05-20.js" target="_blank">
+        2010-05-20
+      </a>
+      : First release
+      <br>
+      2010-05-19: Yacop was born!
+    </div>
+  </body>
 </html>
