@@ -22,7 +22,7 @@ code {
 </head>
 <body>
 <div id="main">
-<?php include("/var/www/yayahuic/sopecms/sites/alepe/html/projects/jquery/callout/index.htm"); ?>
+<?php include("index.htm"); ?>
 </div>
 </body>
 </html>
