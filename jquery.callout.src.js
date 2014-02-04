@@ -69,13 +69,13 @@ jQuery.fn.callout = function (options) {
 				delete caller.callout;
 			} else if(options == "reorder") {
 				var cots = caller.callout;
-				var ltop	= ($.browser.safari)?$(caller).offset().top:$(caller).position().top;
-				var lleft 	= ($.browser.safari)?$(caller).offset().left:$(caller).position().left;
+				var ltop	= $(caller).offset().top;
+				var lleft 	= $(caller).offset().left;
 				if(cots) for(var c = 0; c < cots.length; c++) {
 					if(cots[c].is(':visible')) {
                         cots[c].onCalloutBeforeReorder();
-						var ctop	= ($.browser.safari)?cots[c].offset().top:cots[c].position().top;
-						var cleft 	= ($.browser.safari)?cots[c].offset().left:cots[c].position().left;
+						var ctop	= cots[c].offset().top;
+						var cleft 	= cots[c].offset().left;
 						var ltdiff = ltop - cots[c].attr("top");
 						var lldiff = lleft - cots[c].attr("left");
 						cots[c].css("top",  ctop + ltdiff);
@@ -172,8 +172,8 @@ jQuery.fn.callout = function (options) {
 
 				width 	 = $cont.width();
 				height 	 = $cont.height();
-				var ttop	= (true || $.browser.safari)?$(caller).offset().top:$(caller).position().top;
-				var tleft 	= (true || $.browser.safari)?$(caller).offset().left:$(caller).position().left;
+				var ttop	= $(caller).offset().top;
+				var tleft 	= $(caller).offset().left;
 				var callerRight = parseInt($(caller).css('right'), 10);
 				if (callerRight < 0) {
 				  tleft -= callerRight;
@@ -224,7 +224,6 @@ jQuery.fn.callout = function (options) {
 						else if(pointer == "right" && align == "left")
 							left = tleft - width + 25; //25: slighly to the right
 						
-						if($.browser.opera) $tri2.hide(); //TODO: problem displaying tri2 in bottom and top
 					break;
 					case "left":
 					case "right":
